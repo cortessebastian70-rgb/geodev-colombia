@@ -12,28 +12,28 @@ const cursosData: Record<string, {
   "1": {
     title: "ArcGIS Básico",
     lecciones: [
-      { id: 1, titulo: "Introducción a ArcGIS", duracion: "8 min", youtubeId: "dQw4w9WgXcQ", libre: true },
-      { id: 2, titulo: "Interfaz y herramientas básicas", duracion: "12 min", youtubeId: "dQw4w9WgXcQ", libre: false },
-      { id: 3, titulo: "Capas y simbología", duracion: "15 min", youtubeId: "dQw4w9WgXcQ", libre: false },
-      { id: 4, titulo: "Edición de datos vectoriales", duracion: "18 min", youtubeId: "dQw4w9WgXcQ", libre: false },
-      { id: 5, titulo: "Análisis espacial básico", duracion: "20 min", youtubeId: "dQw4w9WgXcQ", libre: false },
+      { id: 1, titulo: "Introducción a ArcGIS", duracion: "8 min", youtubeId: "4Ujyh4Q0vJw", libre: true },
+      { id: 2, titulo: "Interfaz y herramientas básicas", duracion: "12 min", youtubeId: "4Ujyh4Q0vJw", libre: false },
+      { id: 3, titulo: "Capas y simbología", duracion: "15 min", youtubeId: "4Ujyh4Q0vJw", libre: false },
+      { id: 4, titulo: "Edición de datos vectoriales", duracion: "18 min", youtubeId: "4Ujyh4Q0vJw", libre: false },
+      { id: 5, titulo: "Análisis espacial básico", duracion: "20 min", youtubeId: "4Ujyh4Q0vJw", libre: false },
     ],
   },
   "2": {
     title: "ArcGIS Catastro – Intermedio",
     lecciones: [
-      { id: 1, titulo: "Fundamentos de catastro", duracion: "10 min", youtubeId: "dQw4w9WgXcQ", libre: true },
-      { id: 2, titulo: "Normativa catastral Colombia", duracion: "14 min", youtubeId: "dQw4w9WgXcQ", libre: false },
-      { id: 3, titulo: "Predios y registros", duracion: "16 min", youtubeId: "dQw4w9WgXcQ", libre: false },
-      { id: 4, titulo: "Integración con ArcGIS", duracion: "22 min", youtubeId: "dQw4w9WgXcQ", libre: false },
+      { id: 1, titulo: "Fundamentos de catastro", duracion: "10 min", youtubeId: "4Ujyh4Q0vJw", libre: true },
+      { id: 2, titulo: "Normativa catastral Colombia", duracion: "14 min", youtubeId: "4Ujyh4Q0vJw", libre: false },
+      { id: 3, titulo: "Predios y registros", duracion: "16 min", youtubeId: "4Ujyh4Q0vJw", libre: false },
+      { id: 4, titulo: "Integración con ArcGIS", duracion: "22 min", youtubeId: "4Ujyh4Q0vJw", libre: false },
     ],
   },
   "3": {
     title: "Tool Skills – ArcToolbox",
     lecciones: [
-      { id: 1, titulo: "¿Qué es ArcToolbox?", duracion: "7 min", youtubeId: "dQw4w9WgXcQ", libre: true },
-      { id: 2, titulo: "Herramientas de análisis", duracion: "13 min", youtubeId: "dQw4w9WgXcQ", libre: false },
-      { id: 3, titulo: "Geoprocesamiento", duracion: "17 min", youtubeId: "dQw4w9WgXcQ", libre: false },
+      { id: 1, titulo: "¿Qué es ArcToolbox?", duracion: "7 min", youtubeId: "4Ujyh4Q0vJw", libre: true },
+      { id: 2, titulo: "Herramientas de análisis", duracion: "13 min", youtubeId: "4Ujyh4Q0vJw", libre: false },
+      { id: 3, titulo: "Geoprocesamiento", duracion: "17 min", youtubeId: "4Ujyh4Q0vJw", libre: false },
     ],
   },
 };
