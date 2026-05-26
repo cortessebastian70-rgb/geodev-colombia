@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Mail, Lock, Eye, EyeOff, ArrowLeft, CheckCircle } from "lucide-react";
@@ -89,7 +89,6 @@ function LoginForm({ onForgot }: { onForgot: () => void }) {
   const [show, setShow] = useState(false);
   const [authError, setAuthError] = useState("");
   const { login } = useAuth();
-  const navigate = useNavigate();
 
   const onSubmit = handleSubmit(async (data) => {
     setAuthError("");
@@ -97,7 +96,7 @@ function LoginForm({ onForgot }: { onForgot: () => void }) {
     if (error) {
       setAuthError("Email o contraseña incorrectos");
     } else {
-      navigate({ to: "/dashboard" });
+      window.location.href = "/dashboard";
     }
   });
 
