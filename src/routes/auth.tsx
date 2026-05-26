@@ -1,5 +1,5 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Mail, Lock, Eye, EyeOff, ArrowLeft, CheckCircle } from "lucide-react";
 import { Layout } from "@/components/Layout";
@@ -11,6 +11,14 @@ export const Route = createFileRoute("/auth")({ component: AuthPage });
 
 function AuthPage() {
   const [view, setView] = useState<"login" | "forgot" | "sent">("login");
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) navigate({ to: "/dashboard" });
+  }, [user, navigate]);
+
+  if (user) return null;
 
   return (
     <Layout hideFooter>
@@ -95,9 +103,8 @@ function LoginForm({ onForgot }: { onForgot: () => void }) {
     const { error } = await login(data.email, data.password);
     if (error) {
       setAuthError("Email o contraseña incorrectos");
-    } else {
-      window.location.href = "/dashboard";
     }
+    // No need to navigate — the useEffect in AuthPage handles it when user changes
   });
 
   return (
