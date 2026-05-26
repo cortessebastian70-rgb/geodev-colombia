@@ -76,8 +76,8 @@ function HomePage() {
             >
               <div className="w-28 h-28 rounded-full mx-auto border-2 border-[#3DDC84]/40 overflow-hidden">
                 <img
-                  src="/jhonatan.jpeg"
-                  alt="Jhonatan Cortes"
+                  src="/jhonathan.jpeg"
+                  alt="Jhonathan Cortes"
                   className="w-full h-full object-cover object-top"
                 />
               </div>
