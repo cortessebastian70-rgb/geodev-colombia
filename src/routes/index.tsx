@@ -78,7 +78,7 @@ function HomePage() {
                 <img
                   src="/jhonathan.jpeg"
                   alt="Jhonathan Cortes"
-                  className="w-full h-full object-cover object-top"
+                  className="w-full h-full object-cover object-[center_20%]"
                 />
               </div>
               <div className="mt-4 text-2xl font-bold text-white leading-tight">
