@@ -3,25 +3,25 @@ import { useEffect } from "react";
 import { BookOpen, User, LifeBuoy, LogOut, PlayCircle, ShieldCheck, Map, Layers, Wrench } from "lucide-react";
 import { GeoLogo } from "@/components/GeoLogo";
 import { useAuth } from "@/context/AuthContext";
-
+ 
 export const Route = createFileRoute("/dashboard")({ component: Dashboard });
-
+ 
 const myCourses = [
   { id: 1, title: "ArcGIS Basico", progress: 75, icon: Map },
   { id: 2, title: "ArcGIS Catastro – Intermedio", progress: 40, icon: Layers },
   { id: 3, title: "Tool Skills – ArcToolbox", progress: 10, icon: Wrench },
 ];
-
+ 
 function Dashboard() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
-
+ 
   useEffect(() => {
     if (typeof window !== "undefined" && !user) navigate({ to: "/auth" });
   }, [user, navigate]);
-
+ 
   if (!user) return null;
-
+ 
   return (
     <div className="min-h-screen bg-[#0B1E2D] text-white flex flex-col md:flex-row">
       {/* Sidebar */}
@@ -50,7 +50,7 @@ function Dashboard() {
           <LogOut size={16} /> Cerrar sesion
         </button>
       </aside>
-
+ 
       {/* Main */}
       <main className="flex-1 p-6 md:p-10">
         <header className="flex items-center justify-between gap-4 flex-wrap">
@@ -67,11 +67,11 @@ function Dashboard() {
             </div>
           </div>
         </header>
-
+ 
         <section className="mt-10">
           <h2 className="text-xl font-bold">Mis Cursos</h2>
           <p className="text-sm text-[#94A3B8] mt-1">Continua donde lo dejaste</p>
-
+ 
           <div className="mt-6 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
             {myCourses.map((c) => (
               <article key={c.id} className="card-geo p-6 flex flex-col">
@@ -87,8 +87,11 @@ function Dashboard() {
                     <div className="h-full bg-gradient-brand" style={{ width: `${c.progress}%` }} />
                   </div>
                 </div>
-                <button className="mt-5 inline-flex items-center justify-center gap-2 py-2.5 rounded-full bg-gradient-brand text-[#0B1E2D] font-semibold text-sm hover:brightness-110 transition">
-                  <PlayCircle size={16} /> Continuar
+                <button
+                  onClick={() => navigate({ to: "/curso/$cursoId", params: { cursoId: String(c.id) } })}
+                  className="mt-5 inline-flex items-center justify-center gap-2 py-2.5 rounded-full bg-gradient-brand text-[#0B1E2D] font-semibold text-sm hover:brightness-110 transition"
+                >
+                  <PlayCircle size={16} /> Iniciar
                 </button>
               </article>
             ))}

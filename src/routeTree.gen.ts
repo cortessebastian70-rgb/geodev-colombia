@@ -13,6 +13,7 @@ import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as CursosRouteImport } from './routes/cursos'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CursoIdRouteImport } from './routes/curso.$cursoId'
 
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
@@ -34,18 +35,25 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CursoIdRoute = CursoIdRouteImport.update({
+  id: '/curso/$cursoId',
+  path: '/curso/$cursoId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/cursos': typeof CursosRoute
   '/dashboard': typeof DashboardRoute
+  '/curso/$cursoId': typeof CursoIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/cursos': typeof CursosRoute
   '/dashboard': typeof DashboardRoute
+  '/curso/$cursoId': typeof CursoIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +61,14 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/cursos': typeof CursosRoute
   '/dashboard': typeof DashboardRoute
+  '/curso/$cursoId': typeof CursoIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/cursos' | '/dashboard'
+  fullPaths: '/' | '/auth' | '/cursos' | '/dashboard' | '/curso/$cursoId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/cursos' | '/dashboard'
-  id: '__root__' | '/' | '/auth' | '/cursos' | '/dashboard'
+  to: '/' | '/auth' | '/cursos' | '/dashboard' | '/curso/$cursoId'
+  id: '__root__' | '/' | '/auth' | '/cursos' | '/dashboard' | '/curso/$cursoId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,6 +76,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   CursosRoute: typeof CursosRoute
   DashboardRoute: typeof DashboardRoute
+  CursoIdRoute: typeof CursoIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -99,6 +109,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/curso/$cursoId': {
+      id: '/curso/$cursoId'
+      path: '/curso/$cursoId'
+      fullPath: '/curso/$cursoId'
+      preLoaderRoute: typeof CursoIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -107,6 +124,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   CursosRoute: CursosRoute,
   DashboardRoute: DashboardRoute,
+  CursoIdRoute: CursoIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
