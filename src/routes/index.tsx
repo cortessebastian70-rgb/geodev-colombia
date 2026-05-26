@@ -74,8 +74,12 @@ function HomePage() {
               className="relative mx-auto max-w-md card-geo p-10 text-center"
               style={{ boxShadow: "0 0 80px rgba(61, 220, 132, 0.2)" }}
             >
-              <div className="w-28 h-28 rounded-full mx-auto border-2 border-[#3DDC84]/40 overflow-hidden bg-[#0B1E2D]/60 flex items-center justify-center">
-                <span className="text-[#94A3B8] text-xs">Foto</span>
+              <div className="w-28 h-28 rounded-full mx-auto border-2 border-[#3DDC84]/40 overflow-hidden">
+                <img
+                  src="/jhonatan.jpeg"
+                  alt="Jhonatan Cortes"
+                  className="w-full h-full object-cover object-top"
+                />
               </div>
               <div className="mt-4 text-2xl font-bold text-white leading-tight">
                 Jhonatan Alejandro<br />Cortes Ruano
