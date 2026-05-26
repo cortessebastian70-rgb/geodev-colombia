@@ -15,6 +15,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CursoIdRouteImport } from './routes/curso.$cursoId'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as PerfilRouteImport } from './routes/perfil'
 
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
@@ -46,6 +47,11 @@ const ResetPasswordRoute = ResetPasswordRouteImport.update({
   path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PerfilRoute = PerfilRouteImport.update({
+  id: '/perfil',
+  path: '/perfil',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -54,6 +60,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRoute
   '/curso/$cursoId': typeof CursoIdRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/perfil': typeof PerfilRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -62,6 +69,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardRoute
   '/curso/$cursoId': typeof CursoIdRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/perfil': typeof PerfilRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -71,13 +79,14 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRoute
   '/curso/$cursoId': typeof CursoIdRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/perfil': typeof PerfilRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/cursos' | '/dashboard' | '/curso/$cursoId' | '/reset-password'
+  fullPaths: '/' | '/auth' | '/cursos' | '/dashboard' | '/curso/$cursoId' | '/reset-password' | '/perfil'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/cursos' | '/dashboard' | '/curso/$cursoId' | '/reset-password'
-  id: '__root__' | '/' | '/auth' | '/cursos' | '/dashboard' | '/curso/$cursoId' | '/reset-password'
+  to: '/' | '/auth' | '/cursos' | '/dashboard' | '/curso/$cursoId' | '/reset-password' | '/perfil'
+  id: '__root__' | '/' | '/auth' | '/cursos' | '/dashboard' | '/curso/$cursoId' | '/reset-password' | '/perfil'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -87,6 +96,7 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRoute
   CursoIdRoute: typeof CursoIdRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
+  PerfilRoute: typeof PerfilRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -133,6 +143,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/perfil': {
+      id: '/perfil'
+      path: '/perfil'
+      fullPath: '/perfil'
+      preLoaderRoute: typeof PerfilRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -143,6 +160,7 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRoute,
   CursoIdRoute: CursoIdRoute,
   ResetPasswordRoute: ResetPasswordRoute,
+  PerfilRoute: PerfilRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
