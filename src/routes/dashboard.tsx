@@ -13,7 +13,7 @@ const myCourses = [
 ];
 
 const WHATSAPP_NUMBER = "573107320958";
-const WHATSAPP_MESSAGE = encodeURIComponent("Hola! Necesito ayuda con GeoDev Colombia.");
+const WHATSAPP_MESSAGE = encodeURIComponent("Hola! Necesito ayuda con GeoDev.");
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`;
 
 function Dashboard() {
