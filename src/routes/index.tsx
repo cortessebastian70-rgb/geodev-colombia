@@ -63,7 +63,7 @@ function HomePage() {
             </div>
             <div className="mt-8 flex flex-wrap gap-x-5 gap-y-2 text-xs text-[#94A3B8]">
               <span className="flex items-center gap-1.5"><Award size={14} className="text-[#3DDC84]" /> Aeronautica Civil certificado</span>
-              <span className="flex items-center gap-1.5"><CheckCircle2 size={14} className="text-[#3DDC84]" /> +5 anos experiencia</span>
+              <span className="flex items-center gap-1.5"><CheckCircle2 size={14} className="text-[#3DDC84]" /> +5 años experiencia</span>
               <span className="flex items-center gap-1.5"><ShieldCheck size={14} className="text-[#3DDC84]" /> Pago seguro</span>
             </div>
           </div>
