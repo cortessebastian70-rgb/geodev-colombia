@@ -70,9 +70,19 @@ function Dashboard() {
             </span>
             <button
               onClick={() => navigate({ to: "/perfil" })}
-              className="w-10 h-10 rounded-full bg-gradient-to-br from-[#3DDC84] to-[#00C9FF] text-[#0B1E2D] flex items-center justify-center font-bold hover:brightness-110 transition"
+              className="w-10 h-10 rounded-full overflow-hidden hover:brightness-110 transition border-2 border-[#3DDC84]/40"
             >
-              {initials}
+              {user.avatar_url ? (
+                <img
+                  src={user.avatar_url}
+                  alt={displayName}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="w-full h-full bg-gradient-to-br from-[#3DDC84] to-[#00C9FF] text-[#0B1E2D] flex items-center justify-center font-bold">
+                  {initials}
+                </div>
+              )}
             </button>
           </div>
         </header>

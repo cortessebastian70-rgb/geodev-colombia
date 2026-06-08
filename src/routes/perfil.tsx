@@ -1,8 +1,9 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useForm } from "react-hook-form";
-import { ArrowLeft, User, Briefcase, MapPin, FileText, Save, CheckCircle } from "lucide-react";
+import { ArrowLeft, User, Briefcase, MapPin, FileText, Save, CheckCircle, Camera, Loader2 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
+import { supabase } from "@/lib/supabase";
 
 export const Route = createFileRoute("/perfil")({ component: PerfilPage });
 
@@ -20,6 +21,9 @@ function PerfilPage() {
   const [saved, setSaved] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [uploadingPhoto, setUploadingPhoto] = useState(false);
+  const [photoError, setPhotoError] = useState("");
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const { register, handleSubmit, reset, formState: { errors, isDirty } } = useForm<ProfileForm>();
 
@@ -48,6 +52,45 @@ function PerfilPage() {
     setTimeout(() => setSaved(false), 3000);
   });
 
+  const handlePhotoChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setPhotoError("");
+
+    if (file.size > 2 * 1024 * 1024) {
+      setPhotoError("La imagen debe pesar menos de 2 MB");
+      return;
+    }
+
+    setUploadingPhoto(true);
+
+    try {
+      const fileExt = file.name.split(".").pop();
+      const filePath = `${user.id}/avatar.${fileExt}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from("avatars")
+        .upload(filePath, file, { upsert: true });
+
+      if (uploadError) throw uploadError;
+
+      const { data: { publicUrl } } = supabase.storage
+        .from("avatars")
+        .getPublicUrl(filePath);
+
+      const urlWithTimestamp = `${publicUrl}?t=${Date.now()}`;
+
+      const { error: updateError } = await updateProfile({ avatar_url: urlWithTimestamp });
+      if (updateError) throw new Error(updateError);
+    } catch (err: any) {
+      setPhotoError("Error al subir la foto. Intenta de nuevo.");
+    } finally {
+      setUploadingPhoto(false);
+      if (fileInputRef.current) fileInputRef.current.value = "";
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#0B1E2D] text-white">
       {/* Header */}
@@ -65,9 +108,40 @@ function PerfilPage() {
       <div className="max-w-2xl mx-auto px-4 py-10">
         {/* Avatar */}
         <div className="flex flex-col items-center gap-3 mb-10">
-          <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[#3DDC84] to-[#00C9FF] text-[#0B1E2D] flex items-center justify-center text-3xl font-bold shadow-lg">
-            {initials}
+          <div className="relative group">
+            <div className="w-24 h-24 rounded-full overflow-hidden shadow-lg border-2 border-[#3DDC84]/40">
+              {user.avatar_url ? (
+                <img
+                  src={user.avatar_url}
+                  alt={user.full_name || "Avatar"}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="w-full h-full bg-gradient-to-br from-[#3DDC84] to-[#00C9FF] text-[#0B1E2D] flex items-center justify-center text-3xl font-bold">
+                  {initials}
+                </div>
+              )}
+            </div>
+            <button
+              type="button"
+              onClick={() => fileInputRef.current?.click()}
+              disabled={uploadingPhoto}
+              className="absolute -bottom-1 -right-1 w-9 h-9 rounded-full bg-gradient-to-br from-[#3DDC84] to-[#00C9FF] text-[#0B1E2D] flex items-center justify-center shadow-lg hover:brightness-110 transition disabled:opacity-60"
+              aria-label="Cambiar foto"
+            >
+              {uploadingPhoto ? <Loader2 size={16} className="animate-spin" /> : <Camera size={16} />}
+            </button>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/jpeg,image/png,image/webp"
+              onChange={handlePhotoChange}
+              className="hidden"
+            />
           </div>
+
+          {photoError && <p className="text-xs text-red-400">{photoError}</p>}
+
           <div className="text-center">
             <h2 className="text-xl font-bold">{user.full_name || user.email}</h2>
             <p className="text-sm text-[#94A3B8]">{user.email}</p>
