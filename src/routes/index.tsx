@@ -7,9 +7,9 @@ import {
 import { useState } from "react";
 import { Layout } from "@/components/Layout";
 import { GeoGlobeIcon } from "@/components/GeoLogo";
-
+ 
 export const Route = createFileRoute("/")({ component: HomePage });
-
+ 
 const services = [
   { icon: Plane, color: "#3DDC84", title: "Ortofotos Informativas", desc: "Captura aerea de alta precision para mapas ortorectificados. Ideal para planificacion territorial y analisis de cobertura.", tag: "RPAS · Fotogrametria" },
   { icon: Layers, color: "#14B8A6", title: "Fotogrametria con Dron", desc: "Modelos 3D, nubes de puntos y MDT a partir de vuelos fotogrametricos certificados por Aeronautica Civil.", tag: "3D · MDT · Nube de puntos" },
@@ -18,17 +18,17 @@ const services = [
   { icon: GraduationCap, color: "#3DDC84", title: "Clases Personalizadas SIG", desc: "Formacion en ArcGIS, QGIS y Excel aplicado a los SIG. Niveles basico, intermedio y avanzado con enfoque practico.", tag: "ArcGIS · QGIS · Excel SIG" },
   { icon: Video, color: "#14B8A6", title: "Produccion Audiovisual", desc: "Videos aereos profesionales para marketing, turismo, proyectos ambientales y comunicacion corporativa.", tag: "Dron · Video · Aerial" },
 ];
-
+ 
 const advantages = [
   { icon: ShieldCheck, color: "#3DDC84", title: "Piloto RPAS Certificado", desc: "Operaciones aereas avaladas por la Aeronautica Civil de Colombia. Maxima calidad y seguridad en cada vuelo." },
   { icon: BookOpen, color: "#14B8A6", title: "Cursos 100% Practicos", desc: "Aprende haciendo con proyectos reales de SIG, catastro y analisis espacial. Metodologia aplicada al mundo laboral." },
   { icon: Lock, color: "#3DDC84", title: "Acceso Seguro y Personal", desc: "Tu cuenta activada al confirmar tu pago. Acceso ilimitado a los contenidos durante la vigencia del curso." },
   { icon: MessageCircle, color: "#14B8A6", title: "Soporte por WhatsApp", desc: "Resuelve tus dudas directamente con el instructor. Atencion personalizada durante todo tu proceso de aprendizaje." },
 ];
-
+ 
 function HomePage() {
   const [videoOpen, setVideoOpen] = useState(false);
-
+ 
   return (
     <Layout>
       {/* HERO */}
@@ -36,7 +36,7 @@ function HomePage() {
         <div className="absolute inset-0 grid-pattern opacity-50 pointer-events-none" />
         <div className="absolute top-1/3 -left-32 w-96 h-96 bg-[#3DDC84]/10 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-[#14B8A6]/10 rounded-full blur-3xl" />
-
+ 
         <div className="relative max-w-7xl mx-auto w-full px-6 py-24 grid lg:grid-cols-2 gap-12 items-center">
           <div className="animate-fade-up">
             <span className="inline-block px-4 py-1.5 rounded-full border border-[#3DDC84]/40 text-[#3DDC84] text-xs font-medium tracking-wider">
@@ -67,18 +67,18 @@ function HomePage() {
               <span className="flex items-center gap-1.5"><ShieldCheck size={14} className="text-[#3DDC84]" /> Pago seguro</span>
             </div>
           </div>
-
+ 
           {/* RIGHT CARD */}
           <div className="animate-fade-up [animation-delay:200ms]">
             <div
               className="relative mx-auto max-w-md card-geo p-10 text-center"
               style={{ boxShadow: "0 0 80px rgba(61, 220, 132, 0.2)" }}
             >
-              <div className="w-28 h-28 rounded-full mx-auto border-2 border-[#3DDC84]/40 overflow-hidden">
+              <div className="w-40 h-48 rounded-2xl mx-auto border-2 border-[#3DDC84]/40 overflow-hidden">
                 <img
                   src="/jhonathan.jpeg"
                   alt="Jhonathan Cortes"
-                  className="w-full h-full object-cover object-[center_20%]"
+                  className="w-full h-full object-cover"
                 />
               </div>
               <div className="mt-4 text-2xl font-bold text-white leading-tight">
@@ -105,12 +105,12 @@ function HomePage() {
             </div>
           </div>
         </div>
-
+ 
         <a href="#servicios" className="absolute bottom-6 left-1/2 -translate-x-1/2 text-[#94A3B8] animate-bounce-slow">
           <ChevronDown size={28} />
         </a>
       </section>
-
+ 
       {/* SERVICIOS */}
       <section id="servicios" className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
@@ -135,7 +135,7 @@ function HomePage() {
           </div>
         </div>
       </section>
-
+ 
       {/* VIDEO */}
       <section className="py-24 px-6 bg-[#0F2A3A]">
         <div className="max-w-5xl mx-auto text-center">
@@ -170,7 +170,7 @@ function HomePage() {
           </div>
         </div>
       </section>
-
+ 
       {/* VENTAJAS */}
       <section className="py-24 px-6 hero-gradient">
         <div className="max-w-6xl mx-auto">
@@ -196,3 +196,4 @@ function HomePage() {
     </Layout>
   );
 }
+ 
