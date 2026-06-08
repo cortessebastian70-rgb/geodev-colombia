@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
-import { BookOpen, User, LifeBuoy, LogOut, PlayCircle } from "lucide-react";
+import { BookOpen, User, LifeBuoy, LogOut, Play } from "lucide-react";
 import { GeoLogo } from "@/components/GeoLogo";
 import { useAuth } from "@/context/AuthContext";
 
@@ -93,9 +93,21 @@ function Dashboard() {
           <div className="mt-6 grid md:grid-cols-2 gap-6">
             {myCourses.map((c) => (
               <article key={c.id} className="card-geo p-6 flex flex-col">
-                <div className="aspect-video rounded-xl overflow-hidden border border-[#3DDC84]/15">
-                  <img src={c.image} alt={c.title} className="w-full h-full object-cover" />
-                </div>
+                <button
+                  onClick={() => navigate({ to: "/curso/$cursoId", params: { cursoId: String(c.id) } })}
+                  className="relative aspect-video rounded-xl overflow-hidden border border-[#3DDC84]/15 group cursor-pointer"
+                >
+                  <img
+                    src={c.image}
+                    alt={c.title}
+                    className="w-full h-full object-cover transition duration-300 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition flex items-center justify-center">
+                    <div className="w-16 h-16 rounded-full bg-gradient-brand flex items-center justify-center shadow-xl shadow-[#3DDC84]/40 group-hover:scale-110 transition">
+                      <Play size={28} className="text-[#0B1E2D] ml-1" fill="#0B1E2D" />
+                    </div>
+                  </div>
+                </button>
                 <h3 className="mt-4 font-bold text-white">{c.title}</h3>
                 <div className="mt-3">
                   <div className="flex justify-between text-xs text-[#94A3B8] mb-1.5">
@@ -105,12 +117,6 @@ function Dashboard() {
                     <div className="h-full bg-gradient-brand" style={{ width: `${c.progress}%` }} />
                   </div>
                 </div>
-                <button
-                  onClick={() => navigate({ to: "/curso/$cursoId", params: { cursoId: String(c.id) } })}
-                  className="mt-5 inline-flex items-center justify-center gap-2 py-2.5 rounded-full bg-gradient-brand text-[#0B1E2D] font-semibold text-sm hover:brightness-110 transition"
-                >
-                  <PlayCircle size={16} /> Iniciar
-                </button>
               </article>
             ))}
           </div>
