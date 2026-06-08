@@ -91,11 +91,11 @@ function Dashboard() {
           <h2 className="text-xl font-bold">Mis Cursos</h2>
           <p className="text-sm text-[#94A3B8] mt-1">Continua donde lo dejaste</p>
 
-          <div className="mt-6 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="mt-6 grid md:grid-cols-2 gap-6">
             {myCourses.map((c) => (
               <article key={c.id} className="card-geo p-6 flex flex-col">
-                <div className="h-40 rounded-xl overflow-hidden border border-[#3DDC84]/15 bg-[#0B1E2D]">
-                  <img src={c.image} alt={c.title} className="w-full h-full object-contain" />
+                <div className="aspect-video rounded-xl overflow-hidden border border-[#3DDC84]/15">
+                  <img src={c.image} alt={c.title} className="w-full h-full object-cover" />
                 </div>
                 <h3 className="mt-4 font-bold text-white">{c.title}</h3>
                 <div className="mt-3">
