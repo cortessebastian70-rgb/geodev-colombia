@@ -1,15 +1,15 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
-import { BookOpen, User, LifeBuoy, LogOut, PlayCircle, ShieldCheck, Map, Layers, Wrench } from "lucide-react";
+import { BookOpen, User, LifeBuoy, LogOut, PlayCircle, ShieldCheck } from "lucide-react";
 import { GeoLogo } from "@/components/GeoLogo";
 import { useAuth } from "@/context/AuthContext";
 
 export const Route = createFileRoute("/dashboard")({ component: Dashboard });
 
 const myCourses = [
-  { id: 1, title: "ArcGIS Basico", progress: 75, icon: Map },
-  { id: 2, title: "ArcGIS Catastro – Intermedio", progress: 40, icon: Layers },
-  { id: 3, title: "Tool Skills – ArcToolbox", progress: 10, icon: Wrench },
+  { id: 1, title: "ArcGIS Basico", progress: 75, image: "/curso-1.jpeg" },
+  { id: 2, title: "ArcGIS Catastro – Intermedio", progress: 40, image: "/curso-2.jpeg" },
+  { id: 3, title: "Tool Skills – ArcToolbox", progress: 10, image: "/curso-3.jpeg" },
 ];
 
 const navItems = [
@@ -94,8 +94,8 @@ function Dashboard() {
           <div className="mt-6 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
             {myCourses.map((c) => (
               <article key={c.id} className="card-geo p-6 flex flex-col">
-                <div className="h-32 rounded-xl bg-gradient-to-br from-[#0F3547] to-[#0B1E2D] border border-[#3DDC84]/15 flex items-center justify-center">
-                  <c.icon size={48} className="text-[#3DDC84]" />
+                <div className="h-40 rounded-xl overflow-hidden border border-[#3DDC84]/15">
+                  <img src={c.image} alt={c.title} className="w-full h-full object-cover" />
                 </div>
                 <h3 className="mt-4 font-bold text-white">{c.title}</h3>
                 <div className="mt-3">
