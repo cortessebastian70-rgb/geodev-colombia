@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
-import { BookOpen, User, LifeBuoy, LogOut, PlayCircle, ShieldCheck } from "lucide-react";
+import { BookOpen, User, LifeBuoy, LogOut, PlayCircle } from "lucide-react";
 import { GeoLogo } from "@/components/GeoLogo";
 import { useAuth } from "@/context/AuthContext";
 
@@ -12,11 +12,9 @@ const myCourses = [
   { id: 3, title: "Tool Skills – ArcToolbox", progress: 10, image: "/curso-3.jpeg" },
 ];
 
-const navItems = [
-  { icon: BookOpen, label: "Mis Cursos", to: "/dashboard" },
-  { icon: User, label: "Mi Perfil", to: "/perfil" },
-  { icon: LifeBuoy, label: "Soporte", to: "/dashboard" },
-];
+const WHATSAPP_NUMBER = "573107320958";
+const WHATSAPP_MESSAGE = encodeURIComponent("Hola! Necesito ayuda con GeoDev Colombia.");
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`;
 
 function Dashboard() {
   const { user, logout } = useAuth();
@@ -31,6 +29,12 @@ function Dashboard() {
   const initials = (user.full_name || user.name || user.email).slice(0, 2).toUpperCase();
   const displayName = user.full_name || user.name;
 
+  const navItems = [
+    { icon: BookOpen, label: "Mis Cursos", action: () => navigate({ to: "/dashboard" }) },
+    { icon: User, label: "Mi Perfil", action: () => navigate({ to: "/perfil" }) },
+    { icon: LifeBuoy, label: "Soporte", action: () => window.open(WHATSAPP_URL, "_blank") },
+  ];
+
   return (
     <div className="min-h-screen bg-[#0B1E2D] text-white flex flex-col md:flex-row">
       {/* Sidebar */}
@@ -40,7 +44,7 @@ function Dashboard() {
           {navItems.map((item, i) => (
             <button
               key={item.label}
-              onClick={() => navigate({ to: item.to as any })}
+              onClick={item.action}
               className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition w-full text-left ${
                 i === 0 ? "bg-[#3DDC84]/15 text-[#3DDC84]" : "text-[#94A3B8] hover:bg-white/5 hover:text-white"
               }`}
@@ -64,27 +68,22 @@ function Dashboard() {
             <h1 className="text-2xl md:text-3xl font-bold">Hola, {displayName} 👋</h1>
             <p className="text-sm text-[#94A3B8] mt-1">Bienvenido de nuevo a tu plataforma de aprendizaje</p>
           </div>
-          <div className="flex items-center gap-3">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#3DDC84]/15 text-[#3DDC84] text-xs font-semibold border border-[#3DDC84]/30">
-              <ShieldCheck size={14} /> Cuenta Activa
-            </span>
-            <button
-              onClick={() => navigate({ to: "/perfil" })}
-              className="w-10 h-10 rounded-full overflow-hidden hover:brightness-110 transition border-2 border-[#3DDC84]/40"
-            >
-              {user.avatar_url ? (
-                <img
-                  src={user.avatar_url}
-                  alt={displayName}
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <div className="w-full h-full bg-gradient-to-br from-[#3DDC84] to-[#00C9FF] text-[#0B1E2D] flex items-center justify-center font-bold">
-                  {initials}
-                </div>
-              )}
-            </button>
-          </div>
+          <button
+            onClick={() => navigate({ to: "/perfil" })}
+            className="w-11 h-11 rounded-full overflow-hidden hover:brightness-110 transition border-2 border-[#3DDC84]/40"
+          >
+            {user.avatar_url ? (
+              <img
+                src={user.avatar_url}
+                alt={displayName}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <div className="w-full h-full bg-gradient-to-br from-[#3DDC84] to-[#00C9FF] text-[#0B1E2D] flex items-center justify-center font-bold">
+                {initials}
+              </div>
+            )}
+          </button>
         </header>
 
         <section className="mt-10">
